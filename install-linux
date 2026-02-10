@@ -1,0 +1,55 @@
+#instuctions from the following website. #https://www.crosstalksolutions.com/complete-unifi-os-server-installation-on-linux-best-practices/
+#This script dosn't include setting the ssl for it
+#Version 5.06 installed and tested on Ubuntu Desktop
+apt-get update && apt-get upgrade -y
+apt install podman -y
+wget https://fw-download.ubnt.com/data/unifi-os-server/1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+chmod +x 1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+./1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+#The following to tignted down rules
+UFW firewall rules
+
+# It is a good practice to start by resetting UFW to a clean state.
+# WARNING: This will remove all existing rules.
+# You will be prompted to confirm this action.
+sudo ufw reset
+
+# Set the default policy to deny all incoming traffic and allow all outgoing traffic.
+# This is a secure starting point.
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# UniFi Network Application Ports (both TCP and UDP unless specified)
+# The 'allow' command with just a port number automatically applies to both TCP and UDP.
+
+# UniFi Network Discovery (STUN)
+sudo ufw allow 3478 comment 'UniFi Discovery'
+# UniFi Network Controller ports
+sudo ufw allow 5005 comment 'UniFi Controller Discovery'
+sudo ufw allow 5514 comment 'UniFi Remote Logging'
+sudo ufw allow 6789 comment 'UniFi Device Adoption'
+sudo ufw allow 8080 comment 'UniFi HTTP Portal'
+sudo ufw allow 8443 comment 'UniFi HTTPS Portal (Web UI)'
+sudo ufw allow 8880 comment 'UniFi HTTP Redirect'
+sudo ufw allow 8881 comment 'UniFi HTTPS Redirect'
+sudo ufw allow 8882 comment 'UniFi STUN Server'
+sudo ufw allow 9543 comment 'UniFi API'
+sudo ufw allow 10003 comment 'UniFi AP/Device Monitoring'
+sudo ufw allow 11443 comment 'UniFi WebSockets'
+
+# UniFi Network Server Port, not used in all versions, but good to add
+sudo ufw allow 8843 comment 'UniFi Server Port'
+# UniFi Hotspot Portal
+sudo ufw allow 8880 comment 'UniFi Hotspot Portal'
+
+# Allow SSH (port 22) from your specific WAN IP subnet only
+# Replace '1.2.3.4/32' with your actual WAN IP/subnet if different.
+sudo ufw allow from 1.2.3.4/32 to any port 22 proto tcp comment 'Allow SSH from trusted subnet'
+
+# Enable the firewall to apply the rules.
+# WARNING: After running this command, only the ports and IPs you have explicitly
+# allowed will be able to connect to the server.
+sudo ufw enable
+
+# Verify that all rules have been configured correctly.
+sudo ufw status verbose
