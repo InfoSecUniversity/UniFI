@@ -1,14 +1,12 @@
 #instuctions from the following website. #https://www.crosstalksolutions.com/complete-unifi-os-server-installation-on-linux-best-practices/
 #This script dosn't include setting the ssl for it
 #Version 5.06 installed and tested on Ubuntu Desktop
-apt-get update && apt-get upgrade -y
-apt install podman -y
-wget https://fw-download.ubnt.com/data/unifi-os-server/1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
-chmod +x 1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
-./1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+sudo apt-get update && apt-get upgrade -y
+sudo apt install podman -y
+sudo wget https://fw-download.ubnt.com/data/unifi-os-server/1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+sudo chmod +x 1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+sudo ./1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
 #The following to tignted down rules
-UFW firewall rules
-
 # It is a good practice to start by resetting UFW to a clean state.
 # WARNING: This will remove all existing rules.
 # You will be prompted to confirm this action.
