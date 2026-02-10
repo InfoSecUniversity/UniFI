@@ -3,9 +3,9 @@
 #Version 5.06 installed on Ubuntu Server (Raspberry Pi)
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt install podman -y
-sudo wget https://fw-download.ubnt.com/data/unifi-os-server/1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
-sudo chmod +x 1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
-sudo ./1856-linux-x64-5.0.6-33f4990f-6c68-4e72-9d9c-477496c22450.6-x64
+sudo wget https://fw-download.ubnt.com/data/unifi-os-server/df5b-linux-arm64-5.0.6-f35e944c-f4b6-4190-93a8-be61b96c58f4.6-arm64
+sudo chmod +x df5b-linux-arm64-5.0.6-f35e944c-f4b6-4190-93a8-be61b96c58f4.6-arm64
+sudo ./df5b-linux-arm64-5.0.6-f35e944c-f4b6-4190-93a8-be61b96c58f4.6-arm64
 #After running above commmand. You can log into the webui.
 #The following to tignted down rules
 # It is a good practice to start by resetting UFW to a clean state.
